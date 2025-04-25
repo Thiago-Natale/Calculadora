@@ -46,16 +46,19 @@ public class MainActivity extends AppCompatActivity {
         btnSoma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vlValor1 = Float.parseFloat(edtValor1.getText().toString());
-                vlValor2 = Float.parseFloat(edtValor2.getText().toString());
-                vlResultadoAtual = vlValor1 + vlValor2;
+                try {
+                    vlValor1 = Float.parseFloat(edtValor1.getText().toString());
+                    vlValor2 = Float.parseFloat(edtValor2.getText().toString());
+                    vlResultadoAtual = vlValor1 + vlValor2;
 
-                vwMemoria.setText(String.valueOf(vlMemoria));
-                vwResultado.setText(String.valueOf(vlResultadoAtual));
-                historicoDia.add("Soma: " + vlValor1 + " + " + vlValor2 + " = " + vlResultadoAtual + "  |mem: " + vlMemoria);
-                historicoComp("Soma: " + vlValor1 + " + " + vlValor2 + " = " + vlResultadoAtual + "  |mem: " + vlMemoria);
-                vlMemoria = vlResultadoAtual;
-
+                    vwResultado.setText(String.valueOf(vlResultadoAtual));
+                    historicoDia.add("Soma: " + vlValor1 + " + " + vlValor2 + " = " + vlResultadoAtual);
+                    historicoComp("Soma: " + vlValor1 + " + " + vlValor2 + " = " + vlResultadoAtual);
+                } catch (Exception e) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setMessage("Valor não pode ser nulo")
+                            .show();
+                }
             }
         });
 
@@ -64,15 +67,19 @@ public class MainActivity extends AppCompatActivity {
         btnMenos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vlValor1 = Float.parseFloat(edtValor1.getText().toString());
-                vlValor2 = Float.parseFloat(edtValor2.getText().toString());
-                vlResultadoAtual = vlValor1 - vlValor2;
+                try {
+                    vlValor1 = Float.parseFloat(edtValor1.getText().toString());
+                    vlValor2 = Float.parseFloat(edtValor2.getText().toString());
+                    vlResultadoAtual = vlValor1 - vlValor2;
 
-                vwMemoria.setText(String.valueOf(vlMemoria));
-                vwResultado.setText(String.valueOf(vlResultadoAtual));
-                historicoDia.add("Subtração: " + vlValor1 + " - " + vlValor2 + " = " + vlResultadoAtual + "  |mem: " + vlMemoria);
-                historicoComp("Subtração: " + vlValor1 + " - " + vlValor2 + " = " + vlResultadoAtual + "  |mem: " + vlMemoria);
-                vlMemoria = vlResultadoAtual;
+                    vwResultado.setText(String.valueOf(vlResultadoAtual));
+                    historicoDia.add("Subtração: " + vlValor1 + " - " + vlValor2 + " = " + vlResultadoAtual);
+                    historicoComp("Subtração: " + vlValor1 + " - " + vlValor2 + " = " + vlResultadoAtual);
+                } catch (Exception e) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setMessage("Valor não pode ser nulo")
+                            .show();
+                }
             }
         });
 
@@ -81,15 +88,19 @@ public class MainActivity extends AppCompatActivity {
         btnMultiplica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
                 vlValor1 = Float.parseFloat(edtValor1.getText().toString());
                 vlValor2 = Float.parseFloat(edtValor2.getText().toString());
                 vlResultadoAtual = vlValor1 * vlValor2;
 
-                vwMemoria.setText(String.valueOf(vlMemoria));
                 vwResultado.setText(String.valueOf(vlResultadoAtual));
-                historicoDia.add("Multiplicação: " + vlValor1 + " * " + vlValor2 + " = " + vlResultadoAtual + "  |mem: " + vlMemoria);
-                historicoComp("Multiplicação: " + vlValor1 + " * " + vlValor2 + " = " + vlResultadoAtual + "  |mem: " + vlMemoria);
-                vlMemoria = vlResultadoAtual;
+                historicoDia.add("Multiplicação: " + vlValor1 + " * " + vlValor2 + " = " + vlResultadoAtual);
+                historicoComp("Multiplicação: " + vlValor1 + " * " + vlValor2 + " = " + vlResultadoAtual);
+                } catch (Exception e) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setMessage("Valor não pode ser nulo")
+                            .show();
+                }
             }
         });
 
@@ -98,27 +109,32 @@ public class MainActivity extends AppCompatActivity {
         btnDivide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vlValor1 = Float.parseFloat(edtValor1.getText().toString());
-                vlValor2 = Float.parseFloat(edtValor2.getText().toString());
 
-                if (vlValor2 == 0) {
-                    vwResultado.setText("Erro:divisão por zero");
-                } else if (vlValor2 == 1) {
-                    vlResultadoAtual = vlValor1 * 1;
+                try {
+                    vlValor1 = Float.parseFloat(edtValor1.getText().toString());
+                    vlValor2 = Float.parseFloat(edtValor2.getText().toString());
 
-                    vwMemoria.setText(String.valueOf(vlMemoria));
-                    vwResultado.setText(String.valueOf(vlResultadoAtual));
-                    historicoDia.add("Divisão: " + vlValor1 + " / " + vlValor2 + " = " + vlResultadoAtual + "  |mem: " + vlMemoria);
-                    historicoComp("Divisão: " + vlValor1 + " / " + vlValor2 + " = " + vlResultadoAtual + "  |mem: " + vlMemoria);
-                    vlMemoria = vlResultadoAtual;
-                } else {
-                    vlResultadoAtual = vlValor1 / vlValor2;
+                    if (vlValor2 == 0) {
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setMessage("Erro, divisão por zero")
+                                .show();
+                    } else if (vlValor2 == 1) {
+                        vlResultadoAtual = vlValor1 * 1;
 
-                    vwMemoria.setText(String.valueOf(vlMemoria));
-                    vwResultado.setText(String.valueOf(vlResultadoAtual));
-                    historicoDia.add("Divisão: " + vlValor1 + " / " + vlValor2 + " = " + vlResultadoAtual + "  |mem: " + vlMemoria);
-                    historicoComp("Divisão: " + vlValor1 + " / " + vlValor2 + " = " + vlResultadoAtual + "  |mem: " + vlMemoria);
-                    vlMemoria = vlResultadoAtual;
+                        vwResultado.setText(String.valueOf(vlResultadoAtual));
+                        historicoDia.add("Divisão: " + vlValor1 + " / " + vlValor2 + " = " + vlResultadoAtual);
+                        historicoComp("Divisão: " + vlValor1 + " / " + vlValor2 + " = " + vlResultadoAtual);
+                    } else {
+                        vlResultadoAtual = vlValor1 / vlValor2;
+
+                        vwResultado.setText(String.valueOf(vlResultadoAtual));
+                        historicoDia.add("Divisão: " + vlValor1 + " / " + vlValor2 + " = " + vlResultadoAtual);
+                        historicoComp("Divisão: " + vlValor1 + " / " + vlValor2 + " = " + vlResultadoAtual);
+                    }
+                } catch (Exception e) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setMessage("Valor não pode ser nulo")
+                            .show();
                 }
             }
         });
@@ -130,9 +146,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 vlValor1 = 0;
                 edtValor1.setText("");
-                vwMemoria.setText(String.valueOf(vlMemoria));
-                historicoDia.add("Limpou Valor1" + "  |mem: " + vlMemoria);
-                historicoComp("Limpou Valor1" + "  |mem: " + vlMemoria);
+                historicoDia.add("Limpou Valor1");
+                historicoComp("Limpou Valor1");
             }
         });
 
@@ -143,9 +158,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 vlValor2 = 0;
                 edtValor2.setText("");
-                vwMemoria.setText(String.valueOf(vlMemoria));
-                historicoDia.add("Limpou Valor2" + "  |mem: " + vlMemoria);
-                historicoComp("Limpou Valor2" + "  |mem: " + vlMemoria);
+                historicoDia.add("Limpou Valor2");
+                historicoComp("Limpou Valor2");
             }
         });
 
@@ -160,9 +174,8 @@ public class MainActivity extends AppCompatActivity {
                 edtValor1.setText("");
                 edtValor2.setText("");
                 vwResultado.setText("");
-                vwMemoria.setText(String.valueOf(vlMemoria));
-                historicoDia.add("Limpou valores e resultado   |mem: " + vlMemoria);
-                historicoComp("Limpou valores e resultado   |mem: " + vlMemoria);
+                historicoDia.add("Limpou valores e resultado");
+                historicoComp("Limpou valores e resultado");
             }
         });
 
@@ -171,11 +184,10 @@ public class MainActivity extends AppCompatActivity {
         btnResulPVal1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vwMemoria.setText(String.valueOf(vlMemoria));
                 vlValor1 = vlResultadoAtual;
                 edtValor1.setText(String.valueOf(vlValor1));
-                historicoDia.add("Resul para vl1   |memoria = " + vlMemoria);
-                historicoComp("Resul para vl1   |memoria = " + vlMemoria);
+                historicoDia.add("Resul para vl1");
+                historicoComp("Resul para vl1");
             }
         });
 
@@ -184,13 +196,12 @@ public class MainActivity extends AppCompatActivity {
         btnMMais.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                float vlResultAnt = vlResultadoAtual;
-                vlMemoria = Float.parseFloat(vwMemoria.getText().toString());
-                vlResultadoAtual += vlMemoria;
-                vwResultado.setText(String.valueOf(vlResultadoAtual));
-                historicoDia.add("Mem + resul: " + vlMemoria + " + " + vlResultAnt + "resul = " + vlResultadoAtual);
-                historicoComp("Mem + resul: " + vlMemoria + " + " + vlResultAnt + "resul = " + vlResultadoAtual);
-                vlMemoria = vlResultadoAtual;
+                float vlMemoriaAnt = 0;
+                vlMemoriaAnt = vlMemoria;
+                vlMemoria += vlResultadoAtual;
+                vwMemoria.setText(String.valueOf(vlMemoria));
+                historicoDia.add("Mem + resul: " + vlMemoriaAnt + " + " + vlResultadoAtual + "resul = " + vlMemoria);
+                historicoComp("Mem + resul: " + vlMemoriaAnt + " + " + vlResultadoAtual + "resul = " + vlMemoria);
             }
         });
 
@@ -199,13 +210,12 @@ public class MainActivity extends AppCompatActivity {
         btnMMenos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                float vlResultAnt = vlResultadoAtual;
-                vlMemoria = Float.parseFloat(vwMemoria.getText().toString());
-                vlResultadoAtual = vlMemoria - vlResultadoAtual;
-                vwResultado.setText(String.valueOf(vlResultadoAtual));
-                historicoDia.add("Mem - resul: " + vlMemoria + " - " + vlResultAnt + "resul = " + vlResultadoAtual);
-                historicoComp("Mem - resul: " + vlMemoria + " - " + vlResultAnt + "resul = " + vlResultadoAtual);
-                vlMemoria = vlResultadoAtual;
+                float vlMemoriaAnt = 0;
+                vlMemoriaAnt = vlMemoria;
+                vlMemoria -= vlResultadoAtual;
+                vwMemoria.setText(String.valueOf(vlMemoria));
+                historicoDia.add("Mem + resul: " + vlMemoriaAnt + " - " + vlResultadoAtual + "resul = " + vlMemoria);
+                historicoComp("Mem + resul: " + vlMemoriaAnt + " - " + vlResultadoAtual + "resul = " + vlMemoria);
             }
         });
 
@@ -214,12 +224,11 @@ public class MainActivity extends AppCompatActivity {
         btnMR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vwMemoria.setText(String.valueOf(vlMemoria));
                 vlValor1 = vlMemoria;
                 edtValor1.setText(String.valueOf(vlValor1));
 
-                historicoDia.add("Memoria para valor 1   |memoria = " + vlMemoria);
-                historicoComp("Memoria para valor 1   |memoria = " + vlMemoria);
+                historicoDia.add("Memoria para valor 1");
+                historicoComp("Memoria para valor 1");
             }
         });
 
